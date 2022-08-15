@@ -1,7 +1,8 @@
 ## Devskill Task management
 
 To run:
-- [php artisan serve].
+- [php artisan serve]
+
 On another shell:
 - [npm run dev]
 
