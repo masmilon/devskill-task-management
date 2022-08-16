@@ -36,6 +36,36 @@
         </div>
         <div class="card-body">
             <a href="{{ url('/categories/create') }}" class="btn btn-info float-right">Create new category</a>
+            <table class="table">
+                <tr>
+                    <td>SL</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>
+
+                @php
+                $sl = 1;
+                @endphp
+                @forelse ($category_list as $category)
+                <tr>
+                    <td>{{ $sl++ }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <form action="{{ url("/categories/$category->id") }}" method="POST">
+                            @csrf
+                            @method("delete")
+                            <input class="btn btn-danger btn-sm" type="submit" name="" value="Delete">
+                        </form>
+                    </td>
+                    @empty
+                <tr>
+                    <td colspan="3">No category found</td>
+                </tr>
+                </tr>
+                @endforelse
+
+            </table>
         </div>
         <div class="card-footer">
             Footer

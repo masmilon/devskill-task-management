@@ -17,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view("categories.index");
+        $category_list = Category::where('created_by', Auth::id())->get();
+
+        return view("categories.index", compact('category_list'));
     }
 
     /**
@@ -27,6 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+
         return view("categories.create");
     }
 
@@ -99,6 +102,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo $id;
     }
 }
