@@ -51,8 +51,8 @@
                     <td>{{ $sl++ }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="#">Edit</a>
-                        <form action="{{ url("/categories/$category->id") }}" method="POST">
+                        <a href="{{ url("/categories/$category->id/edit") }}">Edit</a>
+                        <form onSubmit="return confirm('Do you want to delete this category?') " action="{{ url("/categories/$category->id") }}" method="POST" >
                             @csrf
                             @method("delete")
                             <input class="btn btn-danger btn-sm" type="submit" name="" value="Delete">

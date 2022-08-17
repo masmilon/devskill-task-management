@@ -79,7 +79,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cat = Category::where('created_by', Auth::id())->find($id);
+        if ($cat) {
+            return view("categories.edit", compact('cat'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -89,9 +93,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $cat = Category::where('created_by', Auth::id())->find($id);
+        if ($cat) {
+            $cat->name = $request->name;
+            $cat->save();
+        }
+
+        return redirect('/categories');
     }
 
     /**
@@ -102,6 +112,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        echo $id;
+        $cat = Category::where('created_by', Auth::id())->find($id);
+        if ($cat) {
+            $cat->delete();
+        }
+
+        return redirect('/categories');
     }
 }
